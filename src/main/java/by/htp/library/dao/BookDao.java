@@ -9,7 +9,7 @@ public interface BookDao {
 
 	List<Book> list();
 
-	int add(Book book);
+	void add(Book book);
 
 	void delete(Book book);
 

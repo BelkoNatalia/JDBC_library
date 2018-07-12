@@ -2,7 +2,9 @@ package by.htp.library.book;
 
 public class Book {
 	private String title;
+	private int idBook;
 	private Autor autor;
+	private int idAutor;
 	public Book() {
 		super();
 	}
@@ -22,6 +24,18 @@ public class Book {
 	}
 	public void setAutor(Autor autor) {
 		this.autor = autor;
+	}
+	public int getIdAutor() {
+		return idAutor;
+	}
+	public void setIdAutor(int idAutor) {
+		this.idAutor = idAutor;
+	}
+	public int getIdBook() {
+		return idBook;
+	}
+	public void setIdBook(int idBook) {
+		this.idBook = idBook;
 	}
 	@Override
 	public String toString() {

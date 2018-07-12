@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,9 @@ public class BookDaoImpl implements BookDao {
 	private static final String SELECT_BOOK_BYID = "SELECT * FROM book WHERE id_book = ?";
 //	private static final String SELECT_ALL_BOOK = "SELECT * FROM book ";
 	private static final String SELECT_ALL_BOOK = "SELECT title,name,surname,birsdate FROM book, authors WHERE author=authors.id_author";
+	private static final String INSERT_BOOK = "INSERT INTO book(title, author) VALUES (?, ?)";
+	private static final String DELETE_BOOK = "DELETE FROM book WHERE title = ? AND author = ?";
+	private static final String UPDATE_BOOK = "UPDATE book SET title = ?, author = ? WHERE id_book = ?";
 
 	// SELECT title,name,surname,birsdate FROM book, authors WHERE author=authors.id_author;
  
@@ -74,17 +78,51 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public int add(Book book) {
-		return 0;
+	public void add(Book book) {
+		String title = book.getTitle();
+		int idAutor = book.getIdAutor();
+
+		try (Connection conn = DriverManager.getConnection(getUrl(), getLogin(), getPass())) {
+			PreparedStatement ps = conn.prepareStatement(INSERT_BOOK);
+			ps.setString(1,title);
+			ps.setInt(2,idAutor);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void delete(Book book) {
+		String title = book.getTitle();
+		int idAutor = book.getIdAutor();
+
+		try (Connection conn = DriverManager.getConnection(getUrl(), getLogin(), getPass())) {
+			PreparedStatement ps = conn.prepareStatement(DELETE_BOOK);
+			ps.setString(1,title);
+			ps.setInt(2,idAutor);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public void update(Book book) {
+		int idBook = book.getIdBook();
+		String title = book.getTitle();
+		int idAutor = book.getIdAutor();
+
+		try (Connection conn = DriverManager.getConnection(getUrl(), getLogin(), getPass())) {
+			PreparedStatement ps = conn.prepareStatement(UPDATE_BOOK);
+			ps.setString(1,title);
+			ps.setInt(2,idAutor);
+			ps.setInt(3,idBook);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 

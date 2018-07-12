@@ -15,12 +15,33 @@ import by.htp.library.dao.inpl.BookDaoImpl;
 public class MainLibraryController {
 
 	public static void main(String[] args) throws ParseException {
-		BookDao dao = new BookDaoImpl();
-		Book book = dao.read(1);
+		BookDao bookDao = new BookDaoImpl();
+		Book book = bookDao.read(1);
 		System.out.println(book);
-		dao.list();
+		bookDao.list();
 	
-		System.out.println("--------------------------");
+		System.out.println("-----------add Book -----------");
+		Book bookForAdd = new Book();
+		bookForAdd.setIdAutor(5);
+		bookForAdd.setTitle("book_99");
+		bookDao.add(bookForAdd);
+	
+		System.out.println("-----------delite Book -----------");
+		Book bookForDel = new Book();
+		bookForDel.setIdAutor(5);
+		bookForDel.setTitle("book_99");
+		bookDao.delete(bookForDel);
+		
+		System.out.println("-----------update Book -----------");
+		Book bookForUpdate = new Book();
+		bookForUpdate.setIdAutor(5);
+		bookForUpdate.setTitle("new_book1");
+		bookForUpdate.setIdBook(1);
+		bookDao.update(bookForUpdate);
+		
+		
+		System.out.println("-----------read Autor by id-----------");
+		
 		
 		AutorDao autorDao = new AutorDaoImpl();
 		Autor autor = autorDao.readById(3);
