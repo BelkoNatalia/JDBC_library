@@ -2,6 +2,7 @@ package by.htp.library.run;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,11 @@ public class MainLibraryController {
 		bookForUpdate.setIdBook(1);
 		bookDao.update(bookForUpdate);
 		
+		System.out.println("-----------get all Book -----------");
+		List<Book> books = bookDao.list();
+	    for (int i = 0; i < books.size(); i++) {
+	    	System.out.println(books.get(i));
+		}
 		
 		System.out.println("-----------read Autor by id-----------");
 		
